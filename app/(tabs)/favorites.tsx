@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 
-export default function MarketsScreen() {
+export default function FavoritesScreen() {
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title">Markets</ThemedText>
+      <ThemedText type="title">Favorites</ThemedText>
     </ThemedView>
   );
 }
