@@ -19,7 +19,6 @@ import { useFavorites } from '@/hooks/useFavorites';
 import { useProducts } from '@/hooks/useProducts';
 import type { ProductWithTicker } from '@/types/api';
 
-// Column widths — must match ProductListItem exactly
 const COL = { price: 100, change: 72, volume: 56 };
 
 type ActiveTab = 'all' | 'favorites';
@@ -39,7 +38,6 @@ export default function MarketsScreen() {
 
   const handlePress = useCallback(
     (symbol: string) => {
-      // Navigate to detail screen (wired up when product/[symbol].tsx is created)
       router.push({ pathname: '/product/[symbol]', params: { symbol } });
     },
     [router],
@@ -64,11 +62,9 @@ export default function MarketsScreen() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
-      {/* ── Header ─────────────────────────────────────────────── */}
       <View style={styles.header}>
         <Text style={[styles.title, { color: colors.text }]}>Markets</Text>
 
-        {/* All / Favorites toggle */}
         <View style={[styles.toggleRow, { backgroundColor: toggleContainerBg }]}>
           {(['all', 'favorites'] as const).map(tab => {
             const isActive = activeTab === tab;
@@ -95,10 +91,8 @@ export default function MarketsScreen() {
         </View>
       </View>
 
-      {/* ── Search ─────────────────────────────────────────────── */}
       <SearchBar value={searchQuery} onChangeText={setSearchQuery} isDark={isDark} />
 
-      {/* ── Column headers ─────────────────────────────────────── */}
       <View style={[styles.colHeaders, { borderBottomColor: isDark ? '#2C2C2E' : '#E5E7EB' }]}>
         <View style={styles.starSpacer} />
         <Text style={[styles.colText, styles.symbolCol]}>SYMBOL</Text>
@@ -107,7 +101,6 @@ export default function MarketsScreen() {
         <Text style={[styles.colText, { width: COL.volume, textAlign: 'right' }]}>VOLUME</Text>
       </View>
 
-      {/* ── Content ────────────────────────────────────────────── */}
       {isLoading && products.length === 0 ? (
         <ActivityIndicator style={styles.loader} color={colors.tint} size="large" />
       ) : error ? (

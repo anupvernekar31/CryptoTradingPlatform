@@ -15,13 +15,10 @@ export function useProducts() {
 
       const products = await fetchProducts();
 
-      // Focus on perpetual futures — the most relevant contract type for a price tracker
       const perps = products.filter(p => p.contract_type === 'perpetual_futures');
 
-      // Paint the list immediately with empty ticker slots for fast first render
       setAllProducts(perps.map(p => ({ ...p, ticker: null, changePercent: null })));
 
-      // Fetch all tickers in parallel; settled so one failure doesn't block the rest
       const results = await Promise.allSettled(perps.map(p => fetchTicker(p.symbol)));
 
       setAllProducts(
@@ -50,7 +47,6 @@ export function useProducts() {
     loadData();
   }, [loadData]);
 
-  // Client-side search — filter by symbol or description
   const filteredProducts = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return allProducts;

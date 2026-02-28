@@ -1,4 +1,3 @@
-// ─── Shared ─────────────────────────────────────────────────────────────────
 
 export interface ApiListResponse<T> {
   result: T[];
@@ -15,7 +14,6 @@ export interface ApiDetailResponse<T> {
   success: boolean;
 }
 
-// ─── Product (from GET /v2/products) ────────────────────────────────────────
 
 export interface Asset {
   id: number;
@@ -29,7 +27,6 @@ export interface Product {
   id: number;
   symbol: string;
   description: string;
-  /** e.g. 'perpetual_futures' | 'call_options' | 'put_options' | 'futures' | 'spot' */
   contract_type: string;
   product_type: string;
   quoting_asset: Asset;
@@ -37,33 +34,24 @@ export interface Product {
   underlying_asset?: Asset;
 }
 
-// ─── Ticker (from GET /v2/tickers/{symbol}) ──────────────────────────────────
 
 export interface Ticker {
   symbol: string;
-  /** Last traded price */
   close: string;
-  /** 24h open price — used to compute % change */
   open: string;
   high: string;
   low: string;
   mark_price: string;
-  /** 24h contract volume */
   volume: string;
-  /** 24h notional turnover in USD */
   turnover_usd: string;
   product_id: number;
   timestamp: number;
-  /** Only present for perpetual futures */
   funding_rate?: string;
   oi?: string;
 }
 
-// ─── Derived ─────────────────────────────────────────────────────────────────
 
 export interface ProductWithTicker extends Product {
-  /** null while loading or if the ticker fetch failed */
   ticker: Ticker | null;
-  /** Pre-computed ((close - open) / open) * 100, null if unavailable */
   changePercent: number | null;
 }

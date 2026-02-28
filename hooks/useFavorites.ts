@@ -7,7 +7,6 @@ export function useFavorites() {
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load persisted favorites on mount
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY)
       .then(data => {
@@ -27,7 +26,6 @@ export function useFavorites() {
       } else {
         next.add(symbol);
       }
-      // Persist asynchronously — fire and forget
       AsyncStorage.setItem(STORAGE_KEY, JSON.stringify([...next])).catch(console.error);
       return next;
     });

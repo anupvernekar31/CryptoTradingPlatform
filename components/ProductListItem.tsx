@@ -3,7 +3,6 @@ import React, { memo, useCallback } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import type { ProductWithTicker } from '../types/api';
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function formatPrice(price: string | undefined): string {
   if (!price) return '—';
@@ -22,14 +21,12 @@ function formatVolume(usd: string | undefined): string {
   return num.toFixed(0);
 }
 
-// ─── Theme ────────────────────────────────────────────────────────────────────
 
 const COLORS = {
   light: { bg: '#FFFFFF', border: '#F3F4F6', text: '#11181C', sub: '#687076' },
   dark:  { bg: '#1C1C1E', border: '#2C2C2E', text: '#ECEDEE', sub: '#9BA1A6' },
 };
 
-// ─── Component ────────────────────────────────────────────────────────────────
 
 interface Props {
   product: ProductWithTicker;
@@ -97,7 +94,6 @@ export const ProductListItem = memo(function ProductListItem({
   );
 });
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
   row: {
